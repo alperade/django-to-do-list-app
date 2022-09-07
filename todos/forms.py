@@ -7,3 +7,9 @@ class TodoListForm(forms.ModelForm):
     class Meta:
         model = TodoList
         fields = ["name"]
+
+
+class TodoListDeleteForm(forms.ModelForm):
+    class Meta:
+        model = TodoList
+        fields = []
