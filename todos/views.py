@@ -82,3 +82,18 @@ def TodoItemCreateView(request):
         "todos/items/create.html",
         context,
     )
+
+
+def TodoItemUpdateView(request, pk):
+    plan = TodoItem.objects.all().get(pk=pk)
+    if request.method == "POST":
+        form = TodoItemForm(request.POST, instance=plan)
+        if form.is_valid():
+            plan = form.save(commit=False)
+            plan.save()
+            form.save_m2m()
+            return redirect("todo_list_detail", pk=plan.list.id)
+    else:
+        form = TodoItemForm(instance=plan)
+    context = {"form": form}
+    return render(request, "todos/items/edit.html", context)
