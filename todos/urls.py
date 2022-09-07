@@ -6,6 +6,7 @@ from todos.views import (
     TodoListCreateView,
     TodoListUpdateView,
     TodoListDeleteView,
+    TodoItemCreateView,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("create/", TodoListCreateView, name="todo_list_create"),
     path("<int:pk>/edit/", TodoListUpdateView, name="todo_list_update"),
     path("<int:pk>/delete/", TodoListDeleteView, name="todo_list_delete"),
+    path("items/create/", TodoItemCreateView, name="todo_item_create"),
 ]

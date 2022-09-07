@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from todos.models import TodoList, TodoItem
-from todos.forms import TodoListForm, TodoListDeleteForm
+from todos.forms import TodoListForm, TodoListDeleteForm, TodoItemForm
 
 
 def TodoListListView(request):
@@ -64,3 +64,21 @@ def TodoListDeleteView(request, pk):
         "todo_list": plan,
     }
     return render(request, "todos/delete.html", context)
+
+
+def TodoItemCreateView(request):
+    if request.method == "POST":
+        form = TodoItemForm(request.POST)
+        if form.is_valid():
+            plan = form.save(commit=False)
+            plan.save()
+            form.save_m2m()
+            return redirect("todo_list_detail", pk=plan.list.id)
+    else:
+        form = TodoItemForm()
+    context = {"form": form}
+    return render(
+        request,
+        "todos/items/create.html",
+        context,
+    )

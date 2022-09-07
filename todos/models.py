@@ -1,9 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-USER_MODEL = settings.AUTH_USER_MODEL
-# Create your models here.
-
 
 class TodoList(models.Model):
     name = models.CharField(max_length=100)
