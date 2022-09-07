@@ -9,15 +9,15 @@
 <body>
     <main>
         <div>
-            <h1>Create a new list</h1>
+            <h1>Update list</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div>
-                  <button class="button">Create</button>
+                    <button class="button">Update</button>
                 </div>
-              </form>
+            </form>
         </div>
-      </main>
+    </main>
 </body>
 </html>

@@ -33,3 +33,18 @@ def TodoListCreateView(request):
         "todos/create.html",
         context,
     )
+
+
+def TodoListUpdateView(request, pk):
+    plan = TodoList.objects.all().get(pk=pk)
+    if request.method == "POST":
+        form = TodoListForm(request.POST, instance=plan)
+        if form.is_valid():
+            plan = form.save(commit=False)
+            plan.save()
+            form.save_m2m()
+            return redirect("todo_list_detail", pk=plan.id)
+    else:
+        form = TodoListForm(instance=plan)
+    context = {"form": form}
+    return render(request, "todos/edit.html", context)
